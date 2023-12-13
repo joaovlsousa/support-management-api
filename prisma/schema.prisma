@@ -11,10 +11,36 @@ datasource db {
 }
 
 model User {
-  id        String   @id @default(uuid())
+  id        String   @id @default(cuid())
   name      String
   email     String   @unique
   password  String
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+  clients   Client[]
+}
+
+model Client {
+  id        String     @id @default(cuid())
+  name      String
+  role      ClientRole
+  address   Address?
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model Address {
+  id       String @id @default(cuid())
+  city     String
+  street   String
+  number   Int
+  clientId String @unique
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+}
+
+enum ClientRole {
+  PEOPLE
+  COMPANY
 }

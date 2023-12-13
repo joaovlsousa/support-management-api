@@ -7,8 +7,11 @@ interface User {
 }
 
 export function createToken(app: FastifyInstance, user: User): string {
-  const { id, ...payload } = user
-  const token = app.jwt.sign(payload, { sub: id, expiresIn: 60 * 60 * 24 * 7 })
+  const { id, name, email } = user
+  const token = app.jwt.sign(
+    { name, email },
+    { sub: id, expiresIn: 60 * 60 * 24 * 7 },
+  )
 
   return token
 }

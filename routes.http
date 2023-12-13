@@ -16,3 +16,24 @@ Content-Type: application/json
   "email": "joaov@mail.com",
   "password": "123456"
 }
+
+###
+
+POST http://localhost:3333/clients
+Content-Type: application/json
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiam9hbyIsImVtYWlsIjoiam9hb3ZAbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQwL2M1dUdON3F0eE1QNndzNktrY051LzZvRlN3bWtWQXVESGZiQXNLWVhQWUwxZ3ZISmhjQyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMjdUMTM6Mzk6NTEuMjE2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMjdUMTM6Mzk6NTEuMjE2WiIsInN1YiI6ImUzMzJmODMwLTI5YzEtNGE3Zi05NmIxLTExYjIwYTY1OTJjMSIsImlhdCI6MTcwMTM5MTQxNCwiZXhwIjoxNzAxOTk2MjE0fQ.twraDGJDOdIJ-9ypJsUz-ppCY2rjIV5fR8eMp1dpleE
+
+{
+  "name": "teste2",
+  "role": "PEOPLE",
+  "address": {
+    "city": "Patos",
+    "street": "Rua Teste",
+    "number": 113
+  }
+}
+
+###
+
+GET http://localhost:3333/clients
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1lIjoiam9hbyIsImVtYWlsIjoiam9hb3ZAbWFpbC5jb20iLCJwYXNzd29yZCI6IiQyYiQxMCQwL2M1dUdON3F0eE1QNndzNktrY051LzZvRlN3bWtWQXVESGZiQXNLWVhQWUwxZ3ZISmhjQyIsImNyZWF0ZWRBdCI6IjIwMjMtMTEtMjdUMTM6Mzk6NTEuMjE2WiIsInVwZGF0ZWRBdCI6IjIwMjMtMTEtMjdUMTM6Mzk6NTEuMjE2WiIsInN1YiI6ImUzMzJmODMwLTI5YzEtNGE3Zi05NmIxLTExYjIwYTY1OTJjMSIsImlhdCI6MTcwMTM5MTQxNCwiZXhwIjoxNzAxOTk2MjE0fQ.twraDGJDOdIJ-9ypJsUz-ppCY2rjIV5fR8eMp1dpleE
