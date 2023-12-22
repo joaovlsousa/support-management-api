@@ -6,7 +6,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
@@ -15,9 +15,11 @@ model User {
   name      String
   email     String   @unique
   password  String
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
+  createdAt DateTime @default(now()) @map("created_at")
+  updatedAt DateTime @updatedAt @map("updated_at")
   clients   Client[]
+
+  @@map("users")
 }
 
 model Client {
@@ -25,10 +27,12 @@ model Client {
   name      String
   role      ClientRole
   address   Address?
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  userId    String
+  createdAt DateTime   @default(now()) @map("created_at")
+  updatedAt DateTime   @updatedAt @map("updated_at")
+  userId    String     @map("user_id")
   user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("clients")
 }
 
 model Address {
@@ -36,8 +40,10 @@ model Address {
   city     String
   street   String
   number   Int
-  clientId String @unique
+  clientId String @unique @map("client_id")
   client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  @@map("address")
 }
 
 enum ClientRole {
