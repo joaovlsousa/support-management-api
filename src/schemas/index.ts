@@ -38,3 +38,7 @@ export const createClientBodySchema = z.object({
 })
 
 export const createSupportBodySchema = z.object({})
+
+export const updateUserSchema = z.object({
+  name: z.string({ required_error: 'Informe o nome' }).min(3, 'Nome inválido'),
+})
