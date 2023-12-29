@@ -55,6 +55,9 @@ export async function clientRoutes(app: FastifyInstance) {
             },
           },
         },
+        orderBy: {
+          createdAt: 'desc',
+        },
       })
 
       return reply.status(200).send({ clients })

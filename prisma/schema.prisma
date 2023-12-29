@@ -17,7 +17,9 @@ model User {
   password  String
   createdAt DateTime @default(now()) @map("created_at")
   updatedAt DateTime @updatedAt @map("updated_at")
-  clients   Client[]
+
+  clients  Client[]
+  supports Support[]
 
   @@map("users")
 }
@@ -26,11 +28,13 @@ model Client {
   id        String     @id @default(cuid())
   name      String
   role      ClientRole
-  address   Address?
   createdAt DateTime   @default(now()) @map("created_at")
   updatedAt DateTime   @updatedAt @map("updated_at")
-  userId    String     @map("user_id")
-  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  userId   String    @map("user_id")
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  address  Address?
+  supports Support[]
 
   @@map("clients")
 }
@@ -46,7 +50,36 @@ model Address {
   @@map("address")
 }
 
+model Support {
+  id          String   @id @default(cuid())
+  title       String
+  description String   @db.Text()
+  priority    Priority
+  status      Status   @default(OPEN)
+  createdAt   DateTime @default(now()) @map("created_at")
+  updatedAt   DateTime @updatedAt @map("updated_at")
+
+  clientId String @unique @map("client_id")
+  client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
+
+  userId String @unique @map("user_id")
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@map("supports")
+}
+
 enum ClientRole {
   PEOPLE
   COMPANY
+}
+
+enum Priority {
+  HIGH
+  MEDIUM
+  LOW
+}
+
+enum Status {
+  OPEN
+  FINISHED
 }

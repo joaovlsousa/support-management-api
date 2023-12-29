@@ -6,6 +6,7 @@ import jwt from '@fastify/jwt'
 
 import { authRoutes } from './routes/auth'
 import { clientRoutes } from './routes/client'
+import { supportRoutes } from './routes/support'
 import { userRoutes } from './routes/user'
 
 const app = fastify()
@@ -21,6 +22,7 @@ app.register(jwt, {
 
 app.register(authRoutes)
 app.register(clientRoutes)
+app.register(supportRoutes)
 app.register(userRoutes)
 
 app.listen({ port: 3333 }, (err, address) =>

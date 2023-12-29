@@ -37,7 +37,16 @@ export const createClientBodySchema = z.object({
   }),
 })
 
-export const createSupportBodySchema = z.object({})
+export const createSupportBodySchema = z.object({
+  clientId: z
+    .string({ required_error: 'Informe o nome do cliente/empresa' })
+    .cuid2('Usuário inválido'),
+  title: z.string({ required_error: 'Informe o assunto' }),
+  description: z.string({ required_error: 'Informe a descrição' }),
+  priority: z.enum(['HIGH', 'MEDIUM', 'LOW'], {
+    required_error: 'Informe a prioridade',
+  }),
+})
 
 export const updateUserSchema = z.object({
   name: z.string({ required_error: 'Informe o nome' }).min(3, 'Nome inválido'),
