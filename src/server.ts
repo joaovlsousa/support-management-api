@@ -11,9 +11,10 @@ import { userRoutes } from './routes/user'
 
 const app = fastify()
 const jwtSecret = process.env.JWT_SECRET as string
+const websiteUrl = process.env.WEBSITE_URL as string
 
 app.register(cors, {
-  origin: true,
+  origin: websiteUrl,
 })
 
 app.register(jwt, {
