@@ -88,6 +88,7 @@ export async function supportRoutes(app: FastifyInstance) {
         orderBy: {
           createdAt: 'desc',
         },
+        take: 5,
       })
 
       return reply.status(200).send({ supports })

@@ -59,10 +59,10 @@ model Support {
   createdAt   DateTime @default(now()) @map("created_at")
   updatedAt   DateTime @updatedAt @map("updated_at")
 
-  clientId String @unique @map("client_id")
+  clientId String @map("client_id")
   client   Client @relation(fields: [clientId], references: [id], onDelete: Cascade)
 
-  userId String @unique @map("user_id")
+  userId String @map("user_id")
   user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
 
   @@map("supports")
