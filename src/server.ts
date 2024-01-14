@@ -12,6 +12,7 @@ import { userRoutes } from './routes/user'
 const app = fastify()
 const jwtSecret = process.env.JWT_SECRET as string
 const websiteUrl = process.env.WEBSITE_URL as string
+const port = process.env.PORT as string
 
 app.register(cors, {
   origin: websiteUrl,
@@ -26,6 +27,6 @@ app.register(clientRoutes)
 app.register(supportRoutes)
 app.register(userRoutes)
 
-app.listen({ port: 3333 }, (err, address) =>
+app.listen({ port: Number(port) ?? 3333 }, (err, address) =>
   console.log(err ?? `Server is running on ${address}`),
 )
