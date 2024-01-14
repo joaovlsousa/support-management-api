@@ -135,6 +135,42 @@ export async function supportRoutes(app: FastifyInstance) {
     }
   })
 
+  app.patch('/supports/:id', async (req, reply) => {
+    const paramsSchema = z.object({
+      id: z.string().cuid2(),
+    })
+
+    try {
+      const params = paramsSchema.safeParse(req.params)
+
+      if (!params.success) {
+        return reply.status(404).send({ error: 'Atendimento não encontrado' })
+      }
+
+      const support = await db.support.update({
+        where: {
+          id: params.data.id,
+        },
+        data: {
+          status: 'FINISHED',
+        },
+        include: {
+          client: {
+            select: {
+              name: true,
+              role: true,
+            },
+          },
+        },
+      })
+
+      return reply.status(200).send({ support })
+    } catch (error) {
+      console.log(error)
+      return reply.status(500).send({ error: 'Erro interno do servidor' })
+    }
+  })
+
   app.delete('/supports/:id', async (req, reply) => {
     const paramsSchema = z.object({
       id: z.string().cuid2(),
