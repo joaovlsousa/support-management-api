@@ -5,11 +5,11 @@
   "main": "dist/server.js",
   "scripts": {
     "dev": "tsx watch src/server.ts",
-    "build": "tsc",
+    "build": "tsup src",
     "start": "node dist/server.js"
   },
   "engines": {
-    "node": "18.x"
+    "node": "20"
   },
   "keywords": [],
   "author": "",

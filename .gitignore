@@ -3,5 +3,4 @@ node_modules
 .env
 **/*.txt
 routes.http
-.vercel
-/dist
+dist
